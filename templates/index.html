@@ -4,27 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Sentiment Analysis</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #0d1117;
+            color: #ffffff;
+            text-align: center;
+            overflow: hidden;
+        }
+        .container {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 10px rgba(0, 255, 255, 0.5);
+            animation: fadeIn 2s ease-in-out;
+        }
+        p {
+            font-size: 1.2em;
+            max-width: 600px;
+            animation: slideIn 2s ease-in-out;
+        }
+        .btn {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 1.5em;
+            color: white;
+            background: #ff9800;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 15px rgba(255, 152, 0, 0.8);
+        }
+        .btn:hover {
+            background: #e68900;
+            box-shadow: 0 0 30px rgba(255, 152, 0, 1);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .money-note {
+            position: absolute;
+            width: 80px;
+            height: 40px;
+            background: url('https://cdn-icons-png.flaticon.com/512/2721/2721061.png') no-repeat center;
+            background-size: contain;
+            animation: floatMoney 6s linear infinite;
+        }
+        @keyframes floatMoney {
+            from { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            to { transform: translateY(-10vh) rotate(360deg); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
+    <div class="floating-elements"></div>
     <div class="container">
-        <header>
-            <h1>Financial Sentiment Analysis</h1>
-            <p>Understanding Market Emotions for Smarter Investments</p>
-        </header>
-        <main>
-            <div class="info-section">
-                <p>Financial sentiment analysis helps investors gauge the market's emotional tone, providing insights that can lead to better investment decisions. By analyzing news articles, social media, and financial reports, we can predict market trends and sentiment.</p>
-                <p>Stay ahead of the curve with our advanced sentiment analysis tools.</p>
-            </div>
-            <div class="button-container">
-                <button id="predictButton">Predict Sentiment</button>
-            </div>
-        </main>
-        <footer>
-            <p>&copy; 2023 Financial Sentiment Analysis. All rights reserved.</p>
-        </footer>
+        <h1>Financial Sentiment Analysis</h1>
+        <p>Analyze financial market sentiments with advanced AI-driven sentiment detection.</p>
+        <button class="btn" onclick="predictSentiment()">Predict Sentiment</button>
     </div>
-    <script src="script.js"></script>
+    <script>
+        function predictSentiment() {
+            window.location.href = '/predict';
+        }
+        function createFloatingMoney() {
+            const elementContainer = document.querySelector('.floating-elements');
+            for (let i = 0; i < 20; i++) {
+                let money = document.createElement('div');
+                money.classList.add('money-note');
+                money.style.left = Math.random() * window.innerWidth + 'px';
+                money.style.animationDuration = (4 + Math.random() * 5) + 's';
+                elementContainer.appendChild(money);
+            }
+        }
+        createFloatingMoney();
+    </script>
 </body>
 </html>
