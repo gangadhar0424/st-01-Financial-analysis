@@ -22,14 +22,13 @@
 
     /* Money Floating Animation */
     @keyframes floatMoney {
-      from { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-      to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
     .money {
       position: absolute;
-      width: 50px;
-      height: auto;
+      font-size: 40px;
       animation: floatMoney 5s linear infinite;
     }
 
@@ -38,6 +37,10 @@
     .money:nth-child(3) { left: 50%; animation-duration: 5.5s; }
     .money:nth-child(4) { left: 70%; animation-duration: 3.8s; }
     .money:nth-child(5) { left: 90%; animation-duration: 5.2s; }
+    .money:nth-child(6) { left: 20%; animation-duration: 4.5s; }
+    .money:nth-child(7) { left: 40%; animation-duration: 5s; }
+    .money:nth-child(8) { left: 60%; animation-duration: 4.2s; }
+    .money:nth-child(9) { left: 80%; animation-duration: 5.8s; }
 
     /* Header */
     header {
@@ -143,15 +146,30 @@
       padding: 20px;
       margin-top: 40px;
     }
+
+    /* Keyframes for Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
   </style>
 </head>
 <body>
   <!-- Floating Money Elements -->
-  <img src="https://via.placeholder.com/50" class="money" alt="money">
-  <img src="https://via.placeholder.com/50" class="money" alt="money">
-  <img src="https://via.placeholder.com/50" class="money" alt="money">
-  <img src="https://via.placeholder.com/50" class="money" alt="money">
-  <img src="https://via.placeholder.com/50" class="money" alt="money">
+  <div class="money">₹</div>
+  <div class="money">$</div>
+  <div class="money">₹</div>
+  <div class="money">$</div>
+  <div class="money">₹</div>
+  <div class="money">$</div>
+  <div class="money">₹</div>
+  <div class="money">$</div>
+  <div class="money">₹</div>
 
   <!-- Header -->
   <header>
