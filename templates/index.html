@@ -4,46 +4,186 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Financial Sentiment Analysis</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: #fff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Money Floating Animation */
+    @keyframes floatMoney {
+      from { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+      to { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+    }
+
+    .money {
+      position: absolute;
+      width: 50px;
+      height: auto;
+      animation: floatMoney 5s linear infinite;
+    }
+
+    .money:nth-child(1) { left: 10%; animation-duration: 6s; }
+    .money:nth-child(2) { left: 30%; animation-duration: 4s; }
+    .money:nth-child(3) { left: 50%; animation-duration: 5.5s; }
+    .money:nth-child(4) { left: 70%; animation-duration: 3.8s; }
+    .money:nth-child(5) { left: 90%; animation-duration: 5.2s; }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;
+      background: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ffd700;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+    }
+
+    .nav-links li {
+      margin-left: 20px;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ffd700;
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 40px;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    .predict-button {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #1e3c72;
+      background: #ffd700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+      animation: bounce 2s infinite;
+    }
+
+    .predict-button:hover {
+      transform: scale(1.1);
+      background: #ffc107;
+    }
+
+    /* Footer */
+    footer {
+      background: #1e3c72;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Header Section -->
-    <header>
+  <!-- Floating Money Elements -->
+  <img src="https://via.placeholder.com/50" class="money" alt="money">
+  <img src="https://via.placeholder.com/50" class="money" alt="money">
+  <img src="https://via.placeholder.com/50" class="money" alt="money">
+  <img src="https://via.placeholder.com/50" class="money" alt="money">
+  <img src="https://via.placeholder.com/50" class="money" alt="money">
+
+  <!-- Header -->
+  <header>
+    <div class="logo">FinSentiment</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
       <h1>Financial Sentiment Analysis</h1>
-      <p>Analyzing Market Sentiments for Smarter Investments</p>
-    </header>
+      <p>Unlock insights into market trends and investor sentiment with advanced AI-driven analysis.</p>
+      <button class="predict-button">Predict Sentiment</button>
+    </div>
+  </section>
 
-    <!-- Main Content Section -->
-    <main>
-      <div class="info-section">
-        <h2>About Financial Sentiment Analysis</h2>
-        <p>
-          Financial sentiment analysis helps investors understand market trends by analyzing the emotions and opinions expressed in financial news, social media, and reports. Stay ahead of the curve with real-time insights!
-        </p>
-      </div>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2023 FinSentiment. All rights reserved.</p>
+  </footer>
 
-      <!-- Predict Sentiment Button -->
-      <div class="button-container">
-        <button id="predictButton">Predict Sentiment</button>
-      </div>
-
-      <!-- Additional Information Section -->
-      <div class="info-section">
-        <h2>Why Sentiment Analysis Matters</h2>
-        <p>
-          Sentiment analysis provides actionable insights into market behavior. By understanding the collective sentiment, you can make informed decisions and optimize your investment strategies.
-        </p>
-      </div>
-    </main>
-
-    <!-- Footer Section -->
-    <footer>
-      <p>&copy; 2023 Financial Sentiment Analysis. All rights reserved.</p>
-    </footer>
-  </div>
-
-  <!-- JavaScript for Animations -->
-  <script src="script.js"></script>
+  <!-- JavaScript for Button Interaction -->
+  <script>
+    const predictButton = document.querySelector('.predict-button');
+    predictButton.addEventListener('click', () => {
+      window.location.href = '/predict'; // Redirect to /predict
+    });
+  </script>
 </body>
 </html>
