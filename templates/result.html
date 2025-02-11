@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #1e1e2e;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            width: 300px;
+            background: #2a2a3c;
+        }
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.5s ease-in-out;
+        }
+        .positive {
+            background: #4caf50;
+            box-shadow: 0 0 15px #4caf50;
+        }
+        .neutral {
+            background: #ffc107;
+            box-shadow: 0 0 15px #ffc107;
+        }
+        .negative {
+            background: #f44336;
+            box-shadow: 0 0 15px #f44336;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .result {
+            animation: fadeIn 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Prediction Result</h2>
+        <div id="result" class="result neutral">Loading...</div>
+    </div>
+
+    <script>
+        // Simulated backend response
+        const pred = 1; // Replace this with actual backend data
+        const resultDiv = document.getElementById("result");
+        
+        if (pred === 1) {
+            resultDiv.textContent = "Positive";
+            resultDiv.classList.add("positive");
+        } else if (pred === 0) {
+            resultDiv.textContent = "Neutral";
+            resultDiv.classList.add("neutral");
+        } else if (pred === -1) {
+            resultDiv.textContent = "Negative";
+            resultDiv.classList.add("negative");
+        }
+    </script>
+</body>
+</html>
