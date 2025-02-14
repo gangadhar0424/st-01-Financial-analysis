@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Financial Sentiment Analysis</title>
   <style>
-    /* General Reset */
+    /* Global Styles */
     * {
       margin: 0;
       padding: 0;
@@ -14,194 +14,178 @@
 
     body {
       font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #fff;
-      overflow-x: hidden;
-      position: relative;
+      overflow: hidden;
     }
 
-    /* Money Floating Animation */
-    @keyframes floatMoney {
-      0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
-
-    .money {
-      position: absolute;
-      font-size: 40px;
-      animation: floatMoney 5s linear infinite;
-    }
-
-    .money:nth-child(1) { left: 10%; animation-duration: 6s; }
-    .money:nth-child(2) { left: 30%; animation-duration: 4s; }
-    .money:nth-child(3) { left: 50%; animation-duration: 5.5s; }
-    .money:nth-child(4) { left: 70%; animation-duration: 3.8s; }
-    .money:nth-child(5) { left: 90%; animation-duration: 5.2s; }
-    .money:nth-child(6) { left: 20%; animation-duration: 4.5s; }
-    .money:nth-child(7) { left: 40%; animation-duration: 5s; }
-    .money:nth-child(8) { left: 60%; animation-duration: 4.2s; }
-    .money:nth-child(9) { left: 80%; animation-duration: 5.8s; }
-
-    /* Header */
-    header {
+    /* Container for the content */
+    .container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 10%;
-      background: rgba(0, 0, 0, 0.5);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-      color: #ffd700;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-    }
-
-    .nav-links li {
-      margin-left: 20px;
-    }
-
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-
-    .nav-links a:hover {
-      color: #ffd700;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      text-align: center;
-      background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+      height: 100vh;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
-      content: '';
+    /* Heading */
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px rgba(255, 154, 158, 0.8);
+      }
+      100% {
+        text-shadow: 0 0 20px rgba(255, 154, 158, 1);
+      }
+    }
+
+    /* Paragraph */
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      text-align: center;
+      margin-bottom: 40px;
+      line-height: 1.6;
+      color: #ccc;
+    }
+
+    /* Predict Sentiment Button */
+    .predict-btn {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      color: #fff;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .predict-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(255, 154, 158, 0.6);
+    }
+
+    /* Flying Money Animation */
+    @keyframes fly {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .money {
+      position: absolute;
+      font-size: 2rem;
+      color: #ffd700;
+      animation: fly 5s linear infinite;
+      user-select: none;
+    }
+
+    /* Background Particles Animation */
+    .particles {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 1;
+    .particle {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 50%;
+      animation: particles 5s linear infinite;
     }
 
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    .hero p {
-      font-size: 20px;
-      margin-bottom: 40px;
-      animation: fadeIn 3s ease-in-out;
-    }
-
-    .predict-button {
-      padding: 15px 30px;
-      font-size: 18px;
-      font-weight: bold;
-      color: #1e3c72;
-      background: #ffd700;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: transform 0.3s, background 0.3s;
-      animation: bounce 2s infinite;
-    }
-
-    .predict-button:hover {
-      transform: scale(1.1);
-      background: #ffc107;
-    }
-
-    /* Footer */
-    footer {
-      background: #1e3c72;
-      color: #fff;
-      text-align: center;
-      padding: 20px;
-      margin-top: 40px;
-    }
-
-    /* Keyframes for Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    @keyframes particles {
+      0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100vw);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Floating Money Elements -->
-  <div class="money">₹</div>
-  <div class="money">$</div>
-  <div class="money">₹</div>
-  <div class="money">$</div>
-  <div class="money">₹</div>
-  <div class="money">$</div>
-  <div class="money">₹</div>
-  <div class="money">$</div>
-  <div class="money">₹</div>
+  <div class="container">
+    <h1>Financial Sentiment Analysis</h1>
+    <p>
+      "Analyze financial sentiment instantly! Gain insights from news, reports, and social media to make smarter market decisions."
+    </p>
+    <button class="predict-btn" onclick="redirectToPredict()">Predict Sentiment</button>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">FinSentiment</div>
-    <ul class="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Services</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </header>
+    <!-- Flying Money -->
+    <div class="money" style="top: 10%; left: 5%;">💵</div>
+    <div class="money" style="top: 20%; left: 20%;">💷</div>
+    <div class="money" style="top: 30%; left: 35%;">💴</div>
+    <div class="money" style="top: 40%; left: 50%;">💶</div>
+    <div class="money" style="top: 50%; left: 65%;">💵</div>
+    <div class="money" style="top: 60%; left: 80%;">💷</div>
+    <div class="money" style="top: 70%; left: 95%;">💴</div>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Financial Sentiment Analysis</h1>
-      <p>Unlock insights into market trends and investor sentiment with advanced AI-driven analysis.</p>
-      <button class="predict-button">Predict Sentiment</button>
+    <!-- Background Particles -->
+    <div class="particles">
+      <div class="particle" style="top: 10%; left: 20%;"></div>
+      <div class="particle" style="top: 30%; left: 50%;"></div>
+      <div class="particle" style="top: 50%; left: 80%;"></div>
+      <div class="particle" style="top: 70%; left: 10%;"></div>
+      <div class="particle" style="top: 90%; left: 40%;"></div>
     </div>
-  </section>
+  </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2023 FinSentiment. All rights reserved.</p>
-  </footer>
-
-  <!-- JavaScript for Button Interaction -->
   <script>
-    const predictButton = document.querySelector('.predict-button');
-    predictButton.addEventListener('click', () => {
-      window.location.href = '/predict'; // Redirect to /predict
-    });
+    // Function to redirect to /predict
+    function redirectToPredict() {
+      window.location.href = "/predict";
+    }
+
+    // Generate more flying money dynamically
+    const container = document.querySelector('.container');
+    for (let i = 0; i < 20; i++) {
+      const money = document.createElement('div');
+      money.classList.add('money');
+      money.innerHTML = '💵';
+      money.style.top = `${Math.random() * 100}%`;
+      money.style.left = `${Math.random() * 100}%`;
+      money.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      container.appendChild(money);
+    }
+
+    // Generate more particles dynamically
+    const particlesContainer = document.querySelector('.particles');
+    for (let i = 0; i < 50; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      particle.style.top = `${Math.random() * 100}%`;
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.animationDuration = `${Math.random() * 5 + 2}s`;
+      particlesContainer.appendChild(particle);
+    }
   </script>
 </body>
 </html>
