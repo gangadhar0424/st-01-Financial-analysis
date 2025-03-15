@@ -16,7 +16,7 @@
       font-family: 'Arial', sans-serif;
       background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
       color: #fff;
-      overflow-x: hidden; /* Allows vertical scrolling if needed */
+      overflow-x: hidden;
     }
 
     /* Container for the content */
@@ -35,8 +35,9 @@
       font-size: 3.5rem;
       margin-bottom: 20px;
       background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-      
-      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: white; /* Fallback color */
       text-shadow: 0 0 10px rgba(255, 154, 158, 0.8);
       animation: glow 2s infinite alternate;
     }
@@ -104,7 +105,6 @@
       font-size: 2rem;
       color: #ffd700;
       animation: fly 5s linear infinite;
-      
     }
 
     /* Background Particles Animation */
